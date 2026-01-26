@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body
+    class="px-2 flex flex-col pt-10 bg-red-500 md:px-28 lg:px-56 xl:px-72 2xl:px-96"
+  >
+    <h1 class="text-3xl font-bold">Rock Paper Scissors</h1>
+
+    <div class="score flex justify-between mt-8">
+      <p class="border-2 pr-5 py-2 md:text-3xl">
+        computer: <span class="computer_score"></span>
+      </p>
+      <p class="border-2 pr-5 py-2 md:text-3xl">
+        player: <span class="player_score"></span>
+      </p>
+      <p class="border-2 pr-5 py-2 md:text-3xl">
+        Ties: <span class="tie_score"></span>
+      </p>
+    </div>
+    <h2 class="message pt-5 self-center md:text-3xl">make a move!</h2>
+
+    <div class="font-bold pt-10 pb-5 text-xs flex justify-between">
+      <button
+        data-choice="rock"
+        class="choice px-2 border-2 md:text-3xl hover:bg-sky-100"
+      >
+        🥌 Rock
+      </button>
+      <button
+        data-choice="paper"
+        class="choice px-2 border-2 md:text-3xl hover:bg-sky-100"
+      >
+        📃 Paper
+      </button>
+      <button
+        data-choice="Scissors"
+        class="choice px-2 border-2 md:text-3xl hover:bg-sky-100"
+      >
+        ✂ Scissors
+      </button>
+    </div>
+
+    <div class="display flex justify-between">
+      <p class="md:text-2xl">
+        computer chose: <span class="computer_choice animate-pulse">_</span>
+      </p>
+      <p class="md:text-2xl">
+        you chose: <span class="player_choice animate-pulse">_</span>
+      </p>
+    </div>
+
+    <button
+      class="reset px-10 py-3 rounded-full mt-10 bg-red-700 text-white text-xl self-center md:text-3xl"
+    >
+      restart
+    </button>
+
+    <script src="script.js"></script>
+  </body>
+</html>
