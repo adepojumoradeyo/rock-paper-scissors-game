@@ -24,3 +24,5 @@ A simple interactive Rock Paper Scissors game built with HTML, TAILWIND CSS, and
 - Reset button
 
 ## Live Demo
+
+https://rock-paper-scissors-game-rho-khaki.vercel.app/
