@@ -9,6 +9,7 @@ const messageText = document.querySelector(".message");
 const playerScoreText = document.querySelector(".player_score");
 const computerScoreText = document.querySelector(".computer_score");
 const tieScoreText = document.querySelector(".tie_score");
+const maxPlay = document.querySelector(".max_rounds");
 
 const resetBtn = document.querySelector(".reset");
 
@@ -19,10 +20,12 @@ const tieSound = new Audio("sounds/tie.mp3");
 let playerScore = 0;
 let computerScore = 0;
 let tieScore = 0;
-let gameOver = false;
-//
+
 const winningScore = 3;
+let roundsPlayed = 0;
 const maxAttempts = 5;
+
+let gameOver = false;
 
 const choices = ["rock", "paper", "scissors"];
 
@@ -69,21 +72,16 @@ function updateGame(result) {
   tieScoreText.textContent = tieScore;
 }
 
-function checkWinner() {
-  if (playerScore === winningScore) {
+// winner function
+function endgame() {
+  if (playerScore > computerScore) {
     messageText.textContent = "you won the game";
-    gameOver = true;
-  }
-
-  if (computerScore === winningScore) {
+  } else if (computerScore > playerScore) {
     messageText.textContent = "computer won the game";
-    gameOver = true;
-  }
-
-  if (tieScore === winningScore) {
+  } else {
     messageText.textContent = "its a tie";
-    gameOver = true;
   }
+  gameOver = true;
 }
 
 // buttons click
@@ -99,7 +97,15 @@ choicebuttons.forEach((button) => {
 
     const result = game(playerChoice, computerChoice);
     updateGame(result);
-    checkWinner();
+
+    roundsPlayed++;
+    maxPlay.textContent = roundsPlayed;
+    console.log(roundsPlayed);
+
+    // endgame();
+    if (roundsPlayed >= maxAttempts) {
+      endgame();
+    }
   });
 });
 
@@ -108,6 +114,7 @@ resetBtn.addEventListener("click", () => {
   playerScore = 0;
   computerScore = 0;
   tieScore = 0;
+  roundsPlayed = 0;
 
   gameOver = false;
 
