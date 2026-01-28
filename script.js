@@ -19,6 +19,10 @@ const tieSound = new Audio("sounds/tie.mp3");
 let playerScore = 0;
 let computerScore = 0;
 let tieScore = 0;
+let gameOver = false;
+//
+const winningScore = 3;
+const maxAttempts = 5;
 
 const choices = ["rock", "paper", "scissors"];
 
@@ -65,9 +69,28 @@ function updateGame(result) {
   tieScoreText.textContent = tieScore;
 }
 
+function checkWinner() {
+  if (playerScore === winningScore) {
+    messageText.textContent = "you won the game";
+    gameOver = true;
+  }
+
+  if (computerScore === winningScore) {
+    messageText.textContent = "computer won the game";
+    gameOver = true;
+  }
+
+  if (tieScore === winningScore) {
+    messageText.textContent = "its a tie";
+    gameOver = true;
+  }
+}
+
 // buttons click
 choicebuttons.forEach((button) => {
   button.addEventListener("click", () => {
+    if (gameOver) return;
+
     const playerChoice = button.dataset.choice;
     const computerChoice = getcomputerChoice();
 
@@ -76,6 +99,7 @@ choicebuttons.forEach((button) => {
 
     const result = game(playerChoice, computerChoice);
     updateGame(result);
+    checkWinner();
   });
 });
 
@@ -84,6 +108,8 @@ resetBtn.addEventListener("click", () => {
   playerScore = 0;
   computerScore = 0;
   tieScore = 0;
+
+  gameOver = false;
 
   playerScoreText.textContent = 0;
   computerScoreText.textContent = 0;

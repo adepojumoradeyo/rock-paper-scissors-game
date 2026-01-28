@@ -1,4 +1,4 @@
-# Rock Paper Scissors Game
+, # Rock Paper Scissors Game
 
 A simple interactive Rock Paper Scissors game built with HTML, TAILWIND CSS, and JavaScript.
 
