@@ -1,5 +1,7 @@
  # Rock Paper Scissors Game
 
+ Author: Adepoju Ebunlomo
+
 A simple interactive Rock Paper Scissors game built with HTML, TAILWIND CSS, and JavaScript.
 
 ## How to Play
