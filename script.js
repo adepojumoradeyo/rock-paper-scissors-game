@@ -56,15 +56,12 @@ function updateGame(result) {
   if (result === "win") {
     playerScore++;
     messageText.textContent = "🎉 you win!!!";
-    winSound.play();
   } else if (result === "lose") {
     computerScore++;
     messageText.textContent = "you lose 😡";
-    loseSound.play();
   } else {
     tieScore++;
     messageText.textContent = "its a tie";
-    tieSound.play();
   }
 
   playerScoreText.textContent = playerScore;
@@ -75,11 +72,14 @@ function updateGame(result) {
 // winner function
 function endgame() {
   if (playerScore > computerScore) {
-    messageText.textContent = "you won the game";
+    winSound.play();
+    messageText.textContent = "🎉 you won the game";
   } else if (computerScore > playerScore) {
-    messageText.textContent = "computer won the game";
+    messageText.textContent = "😡 computer won the game";
+    loseSound.play();
   } else {
-    messageText.textContent = "its a tie";
+    messageText.textContent = "😆 its a tie";
+    tieSound.play();
   }
   gameOver = true;
 }
@@ -103,7 +103,7 @@ choicebuttons.forEach((button) => {
     console.log(roundsPlayed);
 
     // endgame();
-    if (roundsPlayed >= maxAttempts) {
+    if (roundsPlayed === maxAttempts) {
       endgame();
     }
   });
