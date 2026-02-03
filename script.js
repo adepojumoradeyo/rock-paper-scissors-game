@@ -17,6 +17,8 @@ const winSound = new Audio("sounds/win.mp3");
 const loseSound = new Audio("sounds/lose.mp3");
 const tieSound = new Audio("sounds/tie.mp3");
 
+const scoreLimit = 3;
+
 let playerScore = 0;
 let computerScore = 0;
 let tieScore = 0;
@@ -34,7 +36,7 @@ function getcomputerChoice() {
   const computerRandomChoice = Math.floor(Math.random() * choices.length);
   return choices[computerRandomChoice];
 }
-console.log(getcomputerChoice());
+// console.log(getcomputerChoice());
 
 // game function
 function game(player, computer) {
@@ -70,18 +72,37 @@ function updateGame(result) {
 }
 
 // winner function
-function endgame() {
-  if (playerScore > computerScore) {
+function checkScore() {
+  if (playerScore === scoreLimit) {
+    endgame();
     winSound.play();
     messageText.textContent = "🎉 you won the game";
-  } else if (computerScore > playerScore) {
-    messageText.textContent = "😡 computer won the game";
+  }
+
+  if (computerScore === scoreLimit) {
+    endgame();
     loseSound.play();
-  } else {
+    messageText.textContent = "😡 computer won the game";
+  }
+
+  if (tieScore >= scoreLimit) {
+    endgame();
     messageText.textContent = "😆 its a tie";
     tieSound.play();
   }
+
+  if (playerScore === computerScore) {
+    messageText.textContent = "😆 its a tie";
+    tieSound.play();
+  }
+}
+
+// to end the game
+function endgame() {
   gameOver = true;
+  choicebuttons.forEach((button) => {
+    button.disabled = true;
+  });
 }
 
 // buttons click
@@ -100,9 +121,9 @@ choicebuttons.forEach((button) => {
 
     roundsPlayed++;
     maxPlay.textContent = roundsPlayed;
-    console.log(roundsPlayed);
 
-    // endgame();
+    checkScore();
+
     if (roundsPlayed === maxAttempts) {
       endgame();
     }
@@ -121,6 +142,10 @@ resetBtn.addEventListener("click", () => {
   playerScoreText.textContent = 0;
   computerScoreText.textContent = 0;
   tieScoreText.textContent = 0;
+
+  choicebuttons.forEach((button) => {
+    button.disabled = false;
+  });
 
   playerChoiceText.textContent = "_";
   computerChoiceText.textContent = "_";
